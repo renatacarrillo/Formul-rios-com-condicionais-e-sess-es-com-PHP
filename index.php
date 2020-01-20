@@ -1,35 +1,20 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulário de Inscrição</title>
+</head>
+<body>
+    <p>FORMULÁRIO PARA INSCRIÇÃO DE COMPETIDORES</p>
 
-$categorias = []; //criando um array na variável $categorias
-//criando lista de categorias (infantil, adolescente e adulto)
-$categorias[] = 'infantil'; //na posição 0 infantil
-$categorias[] = 'adolescente'; //na posição 1 adolescente
-$categorias[] = 'adulto'; //na posição 2 adulto
+<form action="script.php" method="post">
+    <p>Seu nome: <input type="text" name="nome"></p>
+    <p>Sua idade: <input type="text" name="idade"></p>
+    <p><input type="submit" value="ENVIAR DADOS DO COMPETIDOR"></p>
+</form>
 
-// print_r($categorias); //mostrando todo o array
+</body>
 
-$nome = 'Renata';
-$idade = '23';
-
-// var_dump($nome, $idade); //mostrando todo o array e definindo o tipo do dado
-
-if($idade >= 0 && $idade <= 12){
-//criando o laço de repetição onde o $i representa o índice se inicia na primeira posição
-//o comando count() conta o número de elementos de uma variável, ou propriedades de um objeto
-    for($i = 0; $i <= count($categorias); $i++){
-        if($categorias[$i] == 'infantil')
-            echo "O nadador ".$nome." compete na categoria infantil";
-    }
-}else if($idade >= 13 && $idade <= 18){
-    for($i = 0; $i <= count($categorias); $i++){
-        if($categorias[$i] == 'adolescente')
-            echo "O nadador ".$nome." compete na categoria adolescente";
-    }
-}else{
-    for($i = 0; $i <= count($categorias); $i++){
-        if($categorias[$i] == 'adulto')
-            echo "O nadador ".$nome." compete na categoria adulto";
-    }
-}
-
-?>
+</html>
