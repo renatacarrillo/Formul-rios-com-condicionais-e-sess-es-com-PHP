@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $categorias = []; //criando um array na variável $categorias
 //criando lista de categorias (infantil, adolescente e adulto)
@@ -15,25 +16,30 @@ $idade = $_POST['idade'];
 
 //CONDICIONAL O NOME NÃO PODE SER VAZIO
 if(empty($nome)){//verifica se uma determinada string/variável tá com o valor preenchido ou não
-    echo "O nome não pode ser vazio";
-    return; //comandO utilizado para não executar mais linhas de código
+    $_SESSION['mensagem de erro'] = "O nome não pode ser vazio"; //$_SESSION array associativo
+    // return; //comandO utilizado para não executar mais linhas de código
+    header('location: index.php');
+    return;
 }
 
 //CONDICIONAL O NOME DEVE CONTER MAIS DE 3 CARACTERES
-if(strlen($nome) < 3){ //contar a quantidade de caracteres que a string tem
-    echo "O nome deve conter mais de 3 caracteres";
-    return; //return serve para não executar o script, o script para aqui
+else if(strlen($nome) < 3){ //contar a quantidade de caracteres que a string tem
+    $_SESSION['mensagem de erro'] = "O nome deve conter mais de 3 caracteres";
+    // return; //return serve para não executar o script, o script para aqui
+    header('location: index.php');
+    return;
 }
 
 //CONDICIONAL O NOME NÃO PODE TER MAIS QUE 20 CARACTERES
-if(strlen($nome) > 20){
-    echo "O nome é muito extenso";
+else if(strlen($nome) > 20){
+    $_SESSION['mensagem de erro'] = "O nome é muito extenso";
     return;
 }
 
 //CONDICIONAL QUE VERIFICA SE A STRING É NUMÉRICA
-if(!is_numeric($idade)){ //a exclamação é a negação do que estiver vindo após ela *se ela não for um número, ele dá o echo
-    echo "Informe sua idade";
+else if(!is_numeric($idade)){ //a exclamação é a negação do que estiver vindo após ela *se ela não for um número, ele dá o echo
+    $_SESSION['mensagem de erro'] = "Informe sua idade";
+    header('location: index.php');
     return;
 }
 
@@ -43,17 +49,23 @@ if($idade >= 0 && $idade <= 12){
 //o comando count() conta o número de elementos de uma variável, ou propriedades de um objeto
     for($i = 0; $i <= count($categorias); $i++){
         if($categorias[$i] == 'infantil')
-            echo "O nadador ".$nome." compete na categoria infantil";
-    }
+            $_SESSION['mensagem de sucesso'] = "O nadador ".$nome." compete na categoria ".$categorias[$i];
+            header('location:index.php');
+            return;
+        }
 }else if($idade >= 13 && $idade <= 18){
     for($i = 0; $i <= count($categorias); $i++){
         if($categorias[$i] == 'adolescente')
-            echo "O nadador ".$nome." compete na categoria adolescente";
+        $_SESSION['mensagem de sucesso'] = "O nadador ".$nome." compete na categoria".$categorias[$i];
+        header('location:index.php');
+        return;
     }
 }else{
     for($i = 0; $i <= count($categorias); $i++){
         if($categorias[$i] == 'adulto')
-            echo "O nadador ".$nome." compete na categoria adulto";
+        $_SESSION['mensagem de sucesso'] = "O nadador ".$nome." compete na categoria".$categorias[$i];
+        header('location:index.php');
+        // return;
     }
 }
 
