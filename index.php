@@ -1,5 +1,6 @@
 <?php 
-    session_start(); //inicia a sessão php, no caso persiste o estado da sessão
+    // session_start(); //inicia a sessão php, no caso persiste o estado da sessão
+    include "./servicos/servicoMensagemSessao.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +16,12 @@
 
 <form action="script.php" method="post">
     <?php 
-        $mensagem_de_sucesso = isset($_SESSION['mensagem de sucesso']) ? $_SESSION['mensagem de sucesso'] : ''; //se minha sessão da chave 'mensagem de erro' tiver um valor iniciado, atribui ele para a variável $mensagem_de_erro e o *?* executa o if *:* se não (else)
+        $mensagem_de_sucesso = obterMensagemSucesso();
         if(!empty($mensagem_de_sucesso)){
         echo $mensagem_de_sucesso;
         }
 
-        $mensagem_de_erro = isset($_SESSION['mensagem de erro']) ? $_SESSION['mensagem de erro'] : ''; //se minha sessão da chave 'mensagem de erro' tiver um valor iniciado, atribui ele para a variável $mensagem_de_erro e o *?* executa o if *:* se não (else)
+        $mensagem_de_erro = obterMensagemErro();
         if(!empty($mensagem_de_erro)){
         echo $mensagem_de_erro;
         }   
